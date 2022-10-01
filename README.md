@@ -22,4 +22,4 @@
 </p>
 
 
-search in list of words sentences
+search in list of words
