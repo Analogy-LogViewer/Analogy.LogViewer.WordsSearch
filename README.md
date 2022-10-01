@@ -16,6 +16,8 @@
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch/blob/master/LICENSE.md">
     <img src="https://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.WordsSearch"  alt="License" />
 </a>
+[![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.WordsSearch)](https://www.nuget.org/packages/Analogy.LogViewer.WordsSearch/)
+[![Nuget](https://img.shields.io/nuget/dt/Analogy.LogViewer.WordsSearch)](https://www.nuget.org/packages/Analogy.LogViewer.WordsSearch/)
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch/releases">
     <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.WordsSearch"  alt="Latest Release" />
 </a>
