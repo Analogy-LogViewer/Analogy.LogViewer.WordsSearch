@@ -1,5 +1,6 @@
 # Words Search for Analogy Log Viewer
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/donate/?business=MCP57TBRAAVXA&no_recurring=0&item_name=Support+Open+source+Projects+%28Analogy+Log+Viewer%2C+HDF5-CSHARP%2C+etc%29&currency_code=USD) [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F77IVQT)
+
 [![GitHub Repo stars](https://img.shields.io/badge/share%20on-reddit-red?logo=reddit)](https://reddit.com/submit?url=https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch&title=Analogy.LogViewer.WorldsSearch)
 [![GitHub Repo stars](https://img.shields.io/badge/share%20on-hacker%20news-orange?logo=ycombinator)](https://news.ycombinator.com/submitlink?u=https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch)
 [![GitHub Repo stars](https://img.shields.io/badge/share%20on-twitter-03A9F4?logo=twitter)](https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch&t=Analogy.LogViewer)
