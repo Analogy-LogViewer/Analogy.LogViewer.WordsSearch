@@ -10,22 +10,22 @@
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 		<Authors>Lior Banai</Authors>
 		<Company>Analogy.LogViewer</Company>
-		<Product>Analogy.LogViewer.Example</Product>
-		<PackageId>Analogy.LogViewer.Example</PackageId>
+		<Product>Analogy.LogViewer.WordsSearch</Product>
+		<PackageId>Analogy.LogViewer.WordsSearch</PackageId>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Copyright>Lior Banai © 2020-2022</Copyright>
+		<Copyright>Lior Banai © 2022</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Example</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Example</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageIconUrl />
-		<Description>Example implementation of Analogy Log Viewer Data Provider</Description>
-		<PackageReleaseNotes>Example implementation of Analogy Log Viewer Data Provider</PackageReleaseNotes>
+		<Description>Worlds Search for Analogy Log Viewer</Description>
+		<PackageReleaseNotes>Worlds Search for Analogy Log Viewer</PackageReleaseNotes>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
-		<Version>3.2.1</Version>
+		<Version>0.1.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
