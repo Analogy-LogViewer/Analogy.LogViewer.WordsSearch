@@ -10,16 +10,16 @@
 
 <p align="center">
     
-<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.WorldsSearch/issues">    <img src="https://img.shields.io/github/issues/Analogy-LogViewer/Analogy.LogViewer.WorldsSearch"  alt="Issues" />
+<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch/issues">    <img src="https://img.shields.io/github/issues/Analogy-LogViewer/Analogy.LogViewer.WordsSearch"  alt="Issues" />
 </a>
-![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/Analogy-LogViewer/Analogy.LogViewer.WorldsSearch)
-<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.WorldsSearch/blob/master/LICENSE.md">
-    <img src="https://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.WorldsSearch"  alt="License" />
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/Analogy-LogViewer/Analogy.LogViewer.WordsSearch)
+<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch/blob/master/LICENSE.md">
+    <img src="https://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.WordsSearch"  alt="License" />
 </a>
-<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.WorldsSearch/releases">
-    <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.WorldsSearch"  alt="Latest Release" />
+<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch/releases">
+    <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.WordsSearch"  alt="Latest Release" />
 </a>
- ![.NET Core Desktop](https://github.com/Analogy-LogViewer/Analogy.LogViewer.WorldsSearch/workflows/.NET%20Core%20Desktop/badge.svg)
+ ![.NET Core Desktop](https://github.com/Analogy-LogViewer/Analogy.LogViewer.WordsSearch/workflows/.NET%20Core%20Desktop/badge.svg)
 </p>
 
 
