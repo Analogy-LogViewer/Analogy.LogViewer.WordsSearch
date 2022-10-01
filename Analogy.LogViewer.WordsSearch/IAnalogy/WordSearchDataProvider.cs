@@ -7,12 +7,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
+using Analogy.LogViewer.WordsSearch.Managers;
 using Analogy.LogViewer.WordsSearch.Properties;
 
 namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
     public sealed class WordSearchDataProvider : IAnalogySingleFileDataProvider
     {
+        private UserSettingsManager Settings => UserSettingsManager.UserSettings;
         public bool DisableFilePoolingOption { get; } = true;
         public string FileNamePath { get; set; }
         public IEnumerable<string> HideColumns() => new List<string>();
@@ -32,7 +34,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         {
             Id = new Guid("b60aba2a-5130-4e49-ac98-ed1229fd5704");
             OptionalTitle = $"Analogy Words Search";
-            FileNamePath = "words.txt";
+            FileNamePath = Path.Combine(Environment.CurrentDirectory, "words.txt");
         }
 
         public Task InitializeDataProvider(IAnalogyLogger logger)
@@ -61,6 +63,9 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             }
 
             List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
+            List<string> words = new List<string>();
+            WordsSearchSettingsForm form = new WordsSearchSettingsForm();
+            form.ShowDialog();
             try
             {
                 long count = 0;
@@ -71,12 +76,42 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
                         while (!reader.EndOfStream)
                         {
                             var line = await reader.ReadLineAsync() ?? "";
-                            var m = new AnalogyInformationMessage(line);
-                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
-                            messages.Add(m);
-                            count++;
+                            var all = line.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                            foreach (var word in all)
+                            {
+                                var lower = word.ToLower();
+                                bool add = word.Length == Settings.Length;
+                                foreach (var wp in Settings.CharsPositions)
+                                {
+                                    if (!add)
+                                    {
+                                        break;
+                                    }
+                                    if (wp.Position < lower.Length &&
+                                    lower[wp.Position] != wp.Char)
+                                    {
+                                        add = false;
+                                    }
+                                }
+
+                                if (add)
+                                {
+                                    words.Add(word);
+                                }
+
+                            }
+
                         }
                     }
+                }
+
+                foreach (var word in words.OrderBy(m => m).Distinct())
+                {
+                    var m = new AnalogyInformationMessage(word);
+                    messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count,
+                            count));
+                    messages.Add(m);
+                    count++;
                 }
                 messagesHandler.AppendMessages(messages, FileNamePath);
                 return messages;
@@ -90,7 +125,8 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
                     Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
                 };
                 messagesHandler.AppendMessage(empty, FileNamePath);
-                return new List<AnalogyLogMessage> { empty };
+                return new List<AnalogyLogMessage> { empty
+    };
             }
         }
 
