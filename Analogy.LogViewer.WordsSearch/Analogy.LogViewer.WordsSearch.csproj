@@ -25,7 +25,7 @@
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
-		<Version>0.2.0</Version>
+		<Version>0.2.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -48,9 +48,14 @@
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
-		<None Include="..\Analogy.LogViewer.WordsSearch\words.txt">
+		<None Include="..\Analogy.LogViewer.WordsSearch\words.txt" copyToOutput="true">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
+			<CopyToOutput>true</CopyToOutput>
+			<BuildAction>Content</BuildAction>
+			<copyToOutput>true</copyToOutput>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</None>
 	</ItemGroup>
 
