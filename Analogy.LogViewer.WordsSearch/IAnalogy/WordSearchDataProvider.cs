@@ -34,7 +34,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         {
             Id = new Guid("b60aba2a-5130-4e49-ac98-ed1229fd5704");
             OptionalTitle = $"Analogy Words Search";
-            FileNamePath = Path.Combine(Environment.CurrentDirectory, "words.txt");
+            FileNamePath = Environment.CurrentDirectory;
         }
 
         public Task InitializeDataProvider(IAnalogyLogger logger)
@@ -50,9 +50,14 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
 
         public async Task<IEnumerable<AnalogyLogMessage>> Process(CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
-            if (string.IsNullOrEmpty(FileNamePath) || !File.Exists(FileNamePath))
+            if (Settings.AllLoadedWords.Any())
             {
-                AnalogyLogMessage empty = new AnalogyLogMessage($"File is null or empty. Aborting.",
+                return FilterWords(messagesHandler);
+            }
+
+            if (string.IsNullOrEmpty(FileNamePath) || !Directory.Exists(FileNamePath))
+            {
+                AnalogyLogMessage empty = new AnalogyLogMessage($"Directory is null or empty. Aborting.",
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
                     Source = "Analogy",
@@ -62,75 +67,89 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
                 return new List<AnalogyLogMessage> { empty };
             }
 
-            List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
-            List<string> words = new List<string>();
-            WordsSearchSettingsForm form = new WordsSearchSettingsForm();
-            form.ShowDialog();
-            try
+            string[] files = Directory.GetFiles(FileNamePath, "words*.txt");
+            long count = 0;
+            foreach (var file in files)
             {
-                long count = 0;
-                using (var stream = File.OpenRead(FileNamePath))
+                try
                 {
-                    using (var reader = new StreamReader(stream))
+                    using (var stream = File.OpenRead(file))
                     {
-                        while (!reader.EndOfStream)
+                        using (var reader = new StreamReader(stream))
                         {
-                            var line = await reader.ReadLineAsync() ?? "";
-                            var all = line.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                            foreach (var word in all)
+                            while (!reader.EndOfStream)
                             {
-                                var lower = word.ToLower();
-                                bool add = word.Length == Settings.Length;
-                                foreach (var wp in Settings.CharsPositions)
-                                {
-                                    if (!add)
-                                    {
-                                        break;
-                                    }
-                                    if (wp.Position < lower.Length &&
-                                    lower[wp.Position] != wp.Char)
-                                    {
-                                        add = false;
-                                    }
-                                }
-
-                                if (add)
-                                {
-                                    words.Add(word);
-                                }
-
+                                var line = await reader.ReadLineAsync() ?? "";
+                                var all = line.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                                Settings.AllLoadedWords.AddRange(all);
                             }
+                        }
 
+                        if (token.IsCancellationRequested)
+                        {
+                            break;
                         }
                     }
                 }
+                catch (Exception e)
+                {
 
-                foreach (var word in words.OrderBy(m => m).Distinct())
-                {
-                    var m = new AnalogyInformationMessage(word);
-                    messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count,
-                            count));
-                    messages.Add(m);
-                    count++;
-                }
-                messagesHandler.AppendMessages(messages, FileNamePath);
-                return messages;
-            }
-            catch (Exception e)
-            {
-                AnalogyLogMessage empty = new AnalogyLogMessage($"Error occured processing file {FileNamePath}. Reason: {e.Message}",
-                    AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
-                {
-                    Source = "Analogy",
-                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                    AnalogyLogMessage empty = new AnalogyLogMessage($"Error occurred processing file {FileNamePath}. Reason: {e.Message}",
+                        AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
+                    {
+                        Source = "Analogy",
+                        Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                    };
+                    messagesHandler.AppendMessage(empty, FileNamePath);
                 };
-                messagesHandler.AppendMessage(empty, FileNamePath);
-                return new List<AnalogyLogMessage> { empty
-    };
             }
+
+            return FilterWords(messagesHandler);
         }
 
+        private IEnumerable<AnalogyLogMessage> FilterWords(ILogMessageCreatedHandler messagesHandler)
+        {
+            List<string> words = new List<string>();
+            List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
+            WordsSearchSettingsForm form = new WordsSearchSettingsForm();
+            form.ShowDialog();
 
 
+            foreach (var word in Settings.AllLoadedWords)
+            {
+                var lower = word.ToLower();
+                bool add = word.Length == Settings.Length;
+                foreach (var wp in Settings.CharsPositions)
+                {
+                    if (!add)
+                    {
+                        break;
+                    }
+                    if (wp.Position < lower.Length &&
+                        lower[wp.Position] != wp.Char)
+                    {
+                        add = false;
+                    }
+                }
+
+                if (add)
+                {
+                    words.Add(word);
+                }
+
+            }
+
+            int count = 0;
+            foreach (var word in words.OrderBy(m => m).Distinct())
+            {
+                var m = new AnalogyInformationMessage(word);
+                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count,
+                    count));
+                messages.Add(m);
+                count++;
+            }
+            messagesHandler.AppendMessages(messages, FileNamePath);
+            return messages;
+        }
     }
 }

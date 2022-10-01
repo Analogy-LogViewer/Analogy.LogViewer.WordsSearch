@@ -15,10 +15,11 @@ namespace Analogy.LogViewer.WordsSearch.Managers
 
         public int Length { get; set; }
         public List<CharPosition> CharsPositions { get; set; }
-
+        public List<string> AllLoadedWords { get; set; }
         public UserSettingsManager()
         {
             Length = 5;
+            AllLoadedWords = new List<string>();
             CharsPositions = new List<CharPosition>();
         }
 

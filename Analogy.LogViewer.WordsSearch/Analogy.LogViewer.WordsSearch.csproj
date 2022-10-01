@@ -25,7 +25,7 @@
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
-		<Version>0.1.0</Version>
+		<Version>0.2.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -48,6 +48,10 @@
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
+		<None Include="..\Analogy.LogViewer.WordsSearch\words.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -63,5 +67,11 @@
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="words.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 </Project>
