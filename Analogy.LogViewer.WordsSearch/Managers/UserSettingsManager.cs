@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Analogy.Interfaces;
 
 namespace Analogy.LogViewer.WordsSearch.Managers
 {
@@ -15,11 +16,11 @@ namespace Analogy.LogViewer.WordsSearch.Managers
 
         public int Length { get; set; }
         public List<CharPosition> CharsPositions { get; set; }
-        public List<string> AllLoadedWords { get; set; }
+        public List<AnalogyLogMessage> AllLoadedWords { get; set; }
         public UserSettingsManager()
         {
             Length = 5;
-            AllLoadedWords = new List<string>();
+            AllLoadedWords = new List<AnalogyLogMessage>();
             CharsPositions = new List<CharPosition>();
         }
 

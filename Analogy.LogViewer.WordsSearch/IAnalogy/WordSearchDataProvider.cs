@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.WordsSearch.Managers;
-using Analogy.LogViewer.WordsSearch.Properties;
 
 namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
@@ -81,7 +80,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
                             {
                                 var line = await reader.ReadLineAsync() ?? "";
                                 var all = line.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                                Settings.AllLoadedWords.AddRange(all);
+                                Settings.AllLoadedWords.AddRange(all.Select(m => new AnalogyInformationMessage(m, file)));
                             }
                         }
 
@@ -109,7 +108,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
 
         private IEnumerable<AnalogyLogMessage> FilterWords(ILogMessageCreatedHandler messagesHandler)
         {
-            List<string> words = new List<string>();
+            List<AnalogyLogMessage> words = new List<AnalogyLogMessage>();
             List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
             WordsSearchSettingsForm form = new WordsSearchSettingsForm();
             form.ShowDialog();
@@ -117,8 +116,8 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
 
             foreach (var word in Settings.AllLoadedWords)
             {
-                var lower = word.ToLower();
-                bool add = word.Length == Settings.Length;
+                var lower = word.Text.ToLower();
+                bool add = word.Text.Length == Settings.Length;
                 foreach (var wp in Settings.CharsPositions)
                 {
                     if (!add)
@@ -140,14 +139,15 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             }
 
             int count = 0;
-            foreach (var word in words.OrderBy(m => m).Distinct())
+
+            foreach (var word in words.OrderBy(m => m.Text).Distinct(new AnalogyLogMessageCustomEqualityComparer() { CompareText = true }))
             {
-                var m = new AnalogyInformationMessage(word);
                 messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count,
                     count));
-                messages.Add(m);
+                messages.Add(word);
                 count++;
             }
+
             messagesHandler.AppendMessages(messages, FileNamePath);
             return messages;
         }
