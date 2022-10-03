@@ -80,7 +80,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
                             {
                                 var line = await reader.ReadLineAsync() ?? "";
                                 var all = line.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                                Settings.AllLoadedWords.AddRange(all.Select(m => new AnalogyInformationMessage(m, file)));
+                                Settings.AllLoadedWords.AddRange(all.Select(m => new AnalogyInformationMessage(m, Path.GetFileName(file))));
                             }
                         }
 
