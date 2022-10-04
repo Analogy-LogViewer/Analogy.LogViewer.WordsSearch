@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Analogy.LogViewer.WordsSearch.Managers;
 
 namespace Analogy.LogViewer.WordsSearch
 {
@@ -22,6 +23,11 @@ namespace Analogy.LogViewer.WordsSearch
             WordsSearchSettings uc = new WordsSearchSettings();
             this.Controls.Add(uc);
             uc.Dock = DockStyle.Fill;
+        }
+
+        private void WordsSearchSettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserSettingsManager.UserSettings.Save();
         }
     }
 }

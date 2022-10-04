@@ -38,6 +38,7 @@
             this.Name = "WordsSearchSettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WordsSearchSettingsForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WordsSearchSettingsForm_FormClosing);
             this.Load += new System.EventHandler(this.WordsSearchSettingsForm_Load);
             this.ResumeLayout(false);
 

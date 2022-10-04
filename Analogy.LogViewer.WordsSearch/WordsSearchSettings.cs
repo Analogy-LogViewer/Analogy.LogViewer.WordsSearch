@@ -16,6 +16,7 @@ namespace Analogy.LogViewer.WordsSearch
         private void WordsSearchSettings_Load(object sender, EventArgs e)
         {
             nudLength.Value = Settings.Length;
+            txtFilesLocation.Text = Settings.FilesLocation;
             RefreshList();
         }
 
@@ -28,7 +29,7 @@ namespace Analogy.LogViewer.WordsSearch
         private void nudLength_ValueChanged(object sender, EventArgs e)
         {
             Settings.Length = decimal.ToInt32(nudLength.Value);
-            nudPosition.Maximum = nudLength.Value-1;
+            nudPosition.Maximum = nudLength.Value - 1;
         }
 
         private void btnDeleteSelection_Click(object sender, EventArgs e)
@@ -59,6 +60,7 @@ namespace Analogy.LogViewer.WordsSearch
             {
                 UserSettingsManager.UserSettings.FilesLocation = folderBrowserDialog1.SelectedPath;
                 txtFilesLocation.Text = UserSettingsManager.UserSettings.FilesLocation;
+                UserSettingsManager.UserSettings.Save();
             }
         }
     }
