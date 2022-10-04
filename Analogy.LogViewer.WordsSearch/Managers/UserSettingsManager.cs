@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
+using Analogy.LogViewer.WordsSearch.Properties;
 
 namespace Analogy.LogViewer.WordsSearch.Managers
 {
@@ -17,11 +18,14 @@ namespace Analogy.LogViewer.WordsSearch.Managers
         public int Length { get; set; }
         public List<CharPosition> CharsPositions { get; set; }
         public List<AnalogyLogMessage> AllLoadedWords { get; set; }
+        public string FilesLocation { get; set; }
         public UserSettingsManager()
         {
             Length = 5;
+            FilesLocation = Environment.CurrentDirectory;
             AllLoadedWords = new List<AnalogyLogMessage>();
             CharsPositions = new List<CharPosition>();
+            Load();
         }
 
         public void RemovePosition(CharPosition charPosition)
@@ -40,6 +44,32 @@ namespace Analogy.LogViewer.WordsSearch.Managers
                 }
             }
             CharsPositions.Add(charPosition);
+        }
+
+        private void Load()
+        {
+            if (Settings.Default.UpgradeRequired)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+                Settings.Default.Save();
+            }
+
+            if (!string.IsNullOrEmpty(Settings.Default.FilesLocation) && Directory.Exists(Settings.Default.FilesLocation))
+            {
+                FilesLocation = Settings.Default.FilesLocation;
+            }
+            else
+            {
+                FilesLocation=Environment.CurrentDirectory;
+            }
+        }
+        public void Save()
+        {
+            Settings.Default.UpgradeRequired = false;
+            Settings.Default.FilesLocation = FilesLocation;
+            Settings.Default.Save();
+
         }
     }
 }

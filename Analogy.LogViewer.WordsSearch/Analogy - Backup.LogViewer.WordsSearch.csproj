@@ -25,7 +25,7 @@
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
-		<Version>0.4.0</Version>
+		<Version>0.3.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -65,11 +65,6 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Resources.resx</DependentUpon>
 		</Compile>
-		<Compile Update="Properties\Settings.Designer.cs">
-		  <DesignTimeSharedInput>True</DesignTimeSharedInput>
-		  <AutoGen>True</AutoGen>
-		  <DependentUpon>Settings.settings</DependentUpon>
-		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -82,7 +77,6 @@
 	<ItemGroup>
 	  <None Update="Properties\Settings.settings">
 	    <Generator>SettingsSingleFileGenerator</Generator>
-	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
 	  </None>
 	  <None Update="words.txt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>

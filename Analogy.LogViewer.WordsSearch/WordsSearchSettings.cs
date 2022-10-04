@@ -50,5 +50,16 @@ namespace Analogy.LogViewer.WordsSearch
                 RefreshList();
             }
         }
+
+        private void btnFolderSelection_Click(object sender, EventArgs e)
+        {
+            var folderBrowserDialog1 = new FolderBrowserDialog();
+            folderBrowserDialog1.SelectedPath = UserSettingsManager.UserSettings.FilesLocation;
+            if (DialogResult.OK == folderBrowserDialog1.ShowDialog(this))
+            {
+                UserSettingsManager.UserSettings.FilesLocation = folderBrowserDialog1.SelectedPath;
+                txtFilesLocation.Text = UserSettingsManager.UserSettings.FilesLocation;
+            }
+        }
     }
 }
