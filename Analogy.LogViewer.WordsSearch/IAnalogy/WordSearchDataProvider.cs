@@ -139,10 +139,29 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             }
 
             int count = 0;
-
-            foreach (var word in words.OrderBy(m => m.Text).Distinct(new AnalogyLogMessageCustomEqualityComparer() { CompareText = true }))
+            var comparer = new AnalogyLogMessageCustomEqualityComparer()
             {
-                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count,
+                CompareText = true,
+                CompareCategory = false,
+                CompareClass = false,
+                CompareDate = false,
+                CompareFileName = false,
+                CompareId = false,
+                CompareLevel = false,
+                CompareLineNumber = false,
+                CompareMethodName = false,
+                CompareModule = false,
+                CompareParameters = false,
+                CompareProcessId = false,
+                CompareSource = false,
+                CompareThread = false,
+                CompareUser = false
+            };
+            foreach (var word in words.Distinct(comparer)
+                         .OrderBy(m => m.Text))
+            {
+                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(
+                    AnalogyFileReadProgressType.Incremental, 1, count,
                     count));
                 messages.Add(word);
                 count++;
