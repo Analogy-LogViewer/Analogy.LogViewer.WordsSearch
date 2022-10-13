@@ -117,7 +117,17 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             foreach (var word in Settings.AllLoadedWords)
             {
                 var lower = word.Text.ToLower();
-                bool add = word.Text.Length == Settings.Length;
+                bool add = word.Text.Length == Settings.Length &&
+                          ( !word.Text.StartsWith('(') ||
+                           !word.Text.StartsWith('[') |
+                           !word.Text.EndsWith(')') ||
+                           !word.Text.EndsWith(']') ||
+                           !word.Text.StartsWith('.') ||
+                           !word.Text.EndsWith('.') ||
+                           !word.Text.EndsWith(':') ||
+                           !word.Text.StartsWith('"') ||
+                           !word.Text.EndsWith('"') ||
+                           !word.Text.EndsWith(','));
                 foreach (var wp in Settings.CharsPositions)
                 {
                     if (!add)
