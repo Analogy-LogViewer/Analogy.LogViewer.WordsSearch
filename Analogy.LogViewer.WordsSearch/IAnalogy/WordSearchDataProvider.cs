@@ -23,7 +23,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public string OptionalTitle { get; set; }
         public bool UseCustomColors { get; set; } = false;
         public AnalogyToolTip? ToolTip { get; set; }
-
+        private char[] ignored = new []{'[',']','{','}','(',')',',','"',':','.','0','1','2','3','4','5','6','7','8','9'};
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
         public (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
@@ -117,17 +117,8 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             foreach (var word in Settings.AllLoadedWords)
             {
                 var lower = word.Text.ToLower();
-                bool add = word.Text.Length == Settings.Length &&
-                          ( !word.Text.StartsWith('(') ||
-                           !word.Text.StartsWith('[') |
-                           !word.Text.EndsWith(')') ||
-                           !word.Text.EndsWith(']') ||
-                           !word.Text.StartsWith('.') ||
-                           !word.Text.EndsWith('.') ||
-                           !word.Text.EndsWith(':') ||
-                           !word.Text.StartsWith('"') ||
-                           !word.Text.EndsWith('"') ||
-                           !word.Text.EndsWith(','));
+                bool add = word.Text.Length == Settings.Length && ignored.All(c => !word.Text.Contains(c));
+                          
                 foreach (var wp in Settings.CharsPositions)
                 {
                     if (!add)
