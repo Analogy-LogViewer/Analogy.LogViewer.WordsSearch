@@ -61,7 +61,7 @@ namespace Analogy.LogViewer.WordsSearch.Managers
             }
             else
             {
-                FilesLocation=Environment.CurrentDirectory;
+                FilesLocation = Environment.CurrentDirectory;
             }
         }
         public void Save()
@@ -70,6 +70,11 @@ namespace Analogy.LogViewer.WordsSearch.Managers
             Settings.Default.FilesLocation = FilesLocation;
             Settings.Default.Save();
 
+        }
+
+        public void ClearAllPositions()
+        {
+            CharsPositions.Clear();
         }
     }
 }

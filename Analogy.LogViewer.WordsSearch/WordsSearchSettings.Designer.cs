@@ -40,6 +40,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilesLocation = new System.Windows.Forms.TextBox();
             this.btnFolderSelection = new System.Windows.Forms.Button();
+            this.btnClearAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPosition)).BeginInit();
             this.SuspendLayout();
@@ -81,7 +82,7 @@
             this.lstCharPositions.ItemHeight = 20;
             this.lstCharPositions.Location = new System.Drawing.Point(3, 77);
             this.lstCharPositions.Name = "lstCharPositions";
-            this.lstCharPositions.Size = new System.Drawing.Size(365, 304);
+            this.lstCharPositions.Size = new System.Drawing.Size(365, 244);
             this.lstCharPositions.TabIndex = 3;
             // 
             // lblAddChar
@@ -106,15 +107,20 @@
             this.lblPosition.AutoSize = true;
             this.lblPosition.Location = new System.Drawing.Point(473, 146);
             this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(151, 20);
+            this.lblPosition.Size = new System.Drawing.Size(147, 20);
             this.lblPosition.TabIndex = 7;
-            this.lblPosition.Text = "Position (zero based):";
+            this.lblPosition.Text = "Position (one based):";
             // 
             // nudPosition
             // 
             this.nudPosition.Location = new System.Drawing.Point(631, 144);
             this.nudPosition.Maximum = new decimal(new int[] {
             1000000,
+            0,
+            0,
+            0});
+            this.nudPosition.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -129,7 +135,7 @@
             // 
             // btnDeleteSelection
             // 
-            this.btnDeleteSelection.Location = new System.Drawing.Point(3, 387);
+            this.btnDeleteSelection.Location = new System.Drawing.Point(3, 327);
             this.btnDeleteSelection.Name = "btnDeleteSelection";
             this.btnDeleteSelection.Size = new System.Drawing.Size(365, 37);
             this.btnDeleteSelection.TabIndex = 8;
@@ -177,10 +183,21 @@
             this.btnFolderSelection.UseVisualStyleBackColor = true;
             this.btnFolderSelection.Click += new System.EventHandler(this.btnFolderSelection_Click);
             // 
+            // btnClearAll
+            // 
+            this.btnClearAll.Location = new System.Drawing.Point(3, 370);
+            this.btnClearAll.Name = "btnClearAll";
+            this.btnClearAll.Size = new System.Drawing.Size(365, 37);
+            this.btnClearAll.TabIndex = 13;
+            this.btnClearAll.Text = "Clear All";
+            this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
+            // 
             // WordsSearchSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnClearAll);
             this.Controls.Add(this.btnFolderSelection);
             this.Controls.Add(this.txtFilesLocation);
             this.Controls.Add(this.label1);
@@ -217,5 +234,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtFilesLocation;
         private System.Windows.Forms.Button btnFolderSelection;
+        private System.Windows.Forms.Button btnClearAll;
     }
 }

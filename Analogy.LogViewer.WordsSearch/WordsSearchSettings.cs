@@ -29,7 +29,7 @@ namespace Analogy.LogViewer.WordsSearch
         private void nudLength_ValueChanged(object sender, EventArgs e)
         {
             Settings.Length = decimal.ToInt32(nudLength.Value);
-            nudPosition.Maximum = nudLength.Value - 1;
+            nudPosition.Maximum = nudLength.Value;
         }
 
         private void btnDeleteSelection_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace Analogy.LogViewer.WordsSearch
         {
             if (!string.IsNullOrEmpty(txtbChr.Text))
             {
-                CharPosition p = new CharPosition(txtbChr.Text[0], decimal.ToInt32(nudPosition.Value));
+                CharPosition p = new CharPosition(txtbChr.Text[0], decimal.ToInt32(nudPosition.Value-1));
                 Settings.AddOrReplacePosition(p);
                 RefreshList();
             }
@@ -62,6 +62,14 @@ namespace Analogy.LogViewer.WordsSearch
                 txtFilesLocation.Text = UserSettingsManager.UserSettings.FilesLocation;
                 UserSettingsManager.UserSettings.Save();
             }
+        }
+
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+           
+                Settings.ClearAllPositions();
+                RefreshList();
+            
         }
     }
 }

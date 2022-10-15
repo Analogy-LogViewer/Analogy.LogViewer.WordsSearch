@@ -25,7 +25,7 @@
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
-		<Version>0.4.5</Version>
+		<Version>0.4.6</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
