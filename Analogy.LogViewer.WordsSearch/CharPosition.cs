@@ -23,7 +23,7 @@ namespace Analogy.LogViewer.WordsSearch
         }
         public override string ToString()
         {
-            return $"[{Position}]:{Char}";
+            return $"[{Position+1}]:{Char}";
         }
     }
 }
