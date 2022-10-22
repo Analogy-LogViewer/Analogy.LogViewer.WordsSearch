@@ -11,7 +11,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
     public class WordsSearchUserSettingsFactory: UserSettingsFactory
     {
-        public override string Title { get; set; } = "Windows Event Logs settings";
+        public override string Title { get; set; } = "Words Search settings";
         public override UserControl DataProviderSettings { get; set; } = new WordsSearchSettings();
 
         public override Guid FactoryId { get; set; } = PrimaryFactory.Id;
