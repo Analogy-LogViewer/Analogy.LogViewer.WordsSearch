@@ -13,9 +13,12 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
     public sealed class WordSearchDataProvider : IAnalogySingleFileDataProvider
     {
+        public event EventHandler<AnalogyStartedProcessingArgs>? ProcessingStarted;
+        public event EventHandler<AnalogyEndProcessingArgs>? ProcessingFinished;
         private UserSettingsManager Settings => UserSettingsManager.UserSettings;
         public bool DisableFilePoolingOption { get; } = true;
         public string FileNamePath { get; set; }
+
         public IEnumerable<string> HideColumns() => new List<string>();
         public Guid Id { get; set; }
         public Image? LargeImage { get; set; } = null;
@@ -42,12 +45,12 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             return Task.CompletedTask;
         }
 
-        public void MessageOpened(AnalogyLogMessage message)
+        public void MessageOpened(IAnalogyLogMessage message)
         {
             //nop
         }
 
-        public async Task<IEnumerable<AnalogyLogMessage>> Process(CancellationToken token, ILogMessageCreatedHandler messagesHandler)
+        public async Task<IEnumerable<IAnalogyLogMessage>> Process(CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (Settings.AllLoadedWords.Any())
             {
@@ -106,10 +109,10 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             return FilterWords(messagesHandler);
         }
 
-        private IEnumerable<AnalogyLogMessage> FilterWords(ILogMessageCreatedHandler messagesHandler)
+        private IEnumerable<IAnalogyLogMessage> FilterWords(ILogMessageCreatedHandler messagesHandler)
         {
-            List<AnalogyLogMessage> words = new List<AnalogyLogMessage>();
-            List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
+            List<IAnalogyLogMessage> words = new List<IAnalogyLogMessage>();
+            List<IAnalogyLogMessage> messages = new List<IAnalogyLogMessage>();
             WordsSearchSettingsForm form = new WordsSearchSettingsForm();
             form.ShowDialog();
 
@@ -143,7 +146,6 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             var comparer = new AnalogyLogMessageCustomEqualityComparer()
             {
                 CompareText = true,
-                CompareCategory = false,
                 CompareClass = false,
                 CompareDate = false,
                 CompareFileName = false,
