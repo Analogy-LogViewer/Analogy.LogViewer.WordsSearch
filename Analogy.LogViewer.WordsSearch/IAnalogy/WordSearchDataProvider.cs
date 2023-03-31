@@ -19,7 +19,6 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public bool DisableFilePoolingOption { get; } = true;
         public string FileNamePath { get; set; }
 
-        public IEnumerable<string> HideColumns() => new List<string>();
         public Guid Id { get; set; }
         public Image? LargeImage { get; set; } = null;
         public Image? SmallImage { get; set; } = null;
@@ -38,6 +37,8 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             OptionalTitle = $"Analogy Words Search";
             FileNamePath = Settings.FilesLocation;
         }
+        public IEnumerable<AnalogyLogMessagePropertyName> HideExistingColumns() => Enumerable.Empty<AnalogyLogMessagePropertyName>();
+        public IEnumerable<string> HideAdditionalColumns() => Enumerable.Empty<string>();
 
         public Task InitializeDataProvider(IAnalogyLogger logger)
         {
