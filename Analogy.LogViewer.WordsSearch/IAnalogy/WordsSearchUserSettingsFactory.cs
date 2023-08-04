@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Analogy.Interfaces;
 using Analogy.LogViewer.WordsSearch.Managers;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
@@ -18,7 +19,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public override Guid FactoryId { get; set; } = PrimaryFactory.Id;
         public override Guid Id { get; set; } = new Guid("38de920b-0a7b-4152-a3b2-a67a07a74082");
 
-        public override void CreateUserControl(IAnalogyLogger logger)
+        public override void CreateUserControl(ILogger logger)
         {
             DataProviderSettings = new WordsSearchSettings();
         }

@@ -17,7 +17,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
 
         public override IEnumerable<IAnalogyChangeLog> ChangeLog { get; set; } = new List<AnalogyChangeLog>
         {
-            new AnalogyChangeLog("Initial Version",AnalogChangeLogType.None, "Lior Banai",new DateTime(2022, 10, 01)),
+            new AnalogyChangeLog("Initial Version",AnalogChangeLogType.None, "Lior Banai",new DateTime(2022, 10, 01), ""),
   };
         public override IEnumerable<string> Contributors { get; set; } = new List<string> { "Lior Banai" };
         public override string About { get; set; } = "Analogy Words Search";

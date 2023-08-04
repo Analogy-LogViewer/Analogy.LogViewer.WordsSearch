@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.WordsSearch.Managers;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
@@ -20,10 +21,10 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public string FileNamePath { get; set; }
 
         public Guid Id { get; set; }
-        public Image? LargeImage { get; set; } = null;
-        public Image? SmallImage { get; set; } = null;
+        public Image? LargeImage { get; set; }
+        public Image? SmallImage { get; set; }
         public string OptionalTitle { get; set; }
-        public bool UseCustomColors { get; set; } = false;
+        public bool UseCustomColors { get; set; }
         public AnalogyToolTip? ToolTip { get; set; }
         private char[] ignored = new []{'[',']','{','}','(',')',',','"',':','.','0','1','2','3','4','5','6','7','8','9'};
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
@@ -40,7 +41,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public IEnumerable<AnalogyLogMessagePropertyName> HideExistingColumns() => Enumerable.Empty<AnalogyLogMessagePropertyName>();
         public IEnumerable<string> HideAdditionalColumns() => Enumerable.Empty<string>();
 
-        public Task InitializeDataProvider(IAnalogyLogger logger)
+        public Task InitializeDataProvider(ILogger logger)
         {
             //do some initialization for this provider
             return Task.CompletedTask;
