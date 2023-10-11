@@ -26,7 +26,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public string OptionalTitle { get; set; }
         public bool UseCustomColors { get; set; }
         public AnalogyToolTip? ToolTip { get; set; }
-        private char[] ignored = new []{'[',']','{','}','(',')',',','"',':','.','0','1','2','3','4','5','6','7','8','9'};
+        private readonly char[] ignored = new []{'[',']','{','}','(',')',',','"',':','.','0','1','2','3','4','5','6','7','8','9', '\'', '“' };
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
         public (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
