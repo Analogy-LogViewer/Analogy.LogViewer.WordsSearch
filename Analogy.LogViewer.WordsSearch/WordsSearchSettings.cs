@@ -39,14 +39,13 @@ namespace Analogy.LogViewer.WordsSearch
                 Settings.RemovePosition(p);
                 RefreshList();
             }
-
         }
 
         private void btnAddOrReplace_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtbChr.Text))
             {
-                CharPosition p = new CharPosition(txtbChr.Text[0], decimal.ToInt32(nudPosition.Value-1));
+                CharPosition p = new CharPosition(txtbChr.Text[0], decimal.ToInt32(nudPosition.Value - 1));
                 Settings.AddOrReplacePosition(p);
                 RefreshList();
             }
@@ -66,10 +65,8 @@ namespace Analogy.LogViewer.WordsSearch
 
         private void btnClearAll_Click(object sender, EventArgs e)
         {
-           
-                Settings.ClearAllPositions();
-                RefreshList();
-            
+            Settings.ClearAllPositions();
+            RefreshList();
         }
     }
 }

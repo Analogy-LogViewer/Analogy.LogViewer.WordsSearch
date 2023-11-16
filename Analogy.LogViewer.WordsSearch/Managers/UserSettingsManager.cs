@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.WordsSearch.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
-using Analogy.LogViewer.WordsSearch.Properties;
 
 namespace Analogy.LogViewer.WordsSearch.Managers
 {
@@ -69,7 +69,6 @@ namespace Analogy.LogViewer.WordsSearch.Managers
             Settings.Default.UpgradeRequired = false;
             Settings.Default.FilesLocation = FilesLocation;
             Settings.Default.Save();
-
         }
 
         public void ClearAllPositions()

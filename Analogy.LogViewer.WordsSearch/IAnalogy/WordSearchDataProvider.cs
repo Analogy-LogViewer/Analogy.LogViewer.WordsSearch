@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
+using Analogy.LogViewer.WordsSearch.Managers;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
-using Analogy.LogViewer.WordsSearch.Managers;
-using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
@@ -26,10 +26,10 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public string OptionalTitle { get; set; }
         public bool UseCustomColors { get; set; }
         public AnalogyToolTip? ToolTip { get; set; }
-        private readonly char[] ignored = new []{'[',']','{','}','(',')',',','"',':','.','0','1','2','3','4','5','6','7','8','9', '\'', '“' };
-        public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+        private readonly char[] ignored = new[] { '[', ']', '{', '}', '(', ')', ',', '"', ':', ';', '`', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '\'', '“' };
+        public IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
-        public (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+        public (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
 
         public WordSearchDataProvider()
@@ -65,7 +65,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
                     Source = "Analogy",
-                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                 };
                 messagesHandler.AppendMessage(empty, FileNamePath);
                 return new List<AnalogyLogMessage> { empty };
@@ -97,15 +97,14 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
                 }
                 catch (Exception e)
                 {
-
                     AnalogyLogMessage empty = new AnalogyLogMessage($"Error occurred processing file {FileNamePath}. Reason: {e.Message}",
                         AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                     {
                         Source = "Analogy",
-                        Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                        Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                     };
                     messagesHandler.AppendMessage(empty, FileNamePath);
-                };
+                }
             }
 
             return FilterWords(messagesHandler);
@@ -117,13 +116,11 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             List<IAnalogyLogMessage> messages = new List<IAnalogyLogMessage>();
             WordsSearchSettingsForm form = new WordsSearchSettingsForm();
             form.ShowDialog();
-
-
             foreach (var word in Settings.AllLoadedWords)
             {
                 var lower = word.Text.ToLower();
                 bool add = word.Text.Length == Settings.Length && ignored.All(c => !word.Text.Contains(c));
-                          
+
                 foreach (var wp in Settings.CharsPositions)
                 {
                     if (!add)
@@ -141,7 +138,6 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
                 {
                     words.Add(word);
                 }
-
             }
 
             int count = 0;
@@ -160,7 +156,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
                 CompareProcessId = false,
                 CompareSource = false,
                 CompareThread = false,
-                CompareUser = false
+                CompareUser = false,
             };
             foreach (var word in words.Distinct(comparer)
                          .OrderBy(m => m.Text))

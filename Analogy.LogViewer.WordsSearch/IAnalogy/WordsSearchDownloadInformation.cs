@@ -32,6 +32,5 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public override string? LatestVersionNumber { get; set; }
         public override TargetFrameworkAttribute CurrentFrameworkAttribute { get; set; } = (TargetFrameworkAttribute)Assembly.GetExecutingAssembly().GetCustomAttribute(typeof(TargetFrameworkAttribute));
         protected override string RepositoryURL { get; set; } = "https://api.github.com/repos/LiorBanai/Analogy.LogViewer.WordsSearch";
-        
     }
 }

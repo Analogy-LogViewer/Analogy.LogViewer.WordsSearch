@@ -1,17 +1,17 @@
-﻿using Analogy.LogViewer.Template;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Template;
+using Analogy.LogViewer.WordsSearch.Managers;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Analogy.Interfaces;
-using Analogy.LogViewer.WordsSearch.Managers;
-using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
-    public class WordsSearchUserSettingsFactory: TemplateUserSettingsFactory
+    public class WordsSearchUserSettingsFactory : TemplateUserSettingsFactory
     {
         public override string Title { get; set; } = "Words Search settings";
         public override UserControl DataProviderSettings { get; set; }
