@@ -8,7 +8,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
     public class WordsSearchDownloadInformation : Template.AnalogyDownloadInformation
     {
         public override Guid FactoryId { get; set; } = PrimaryFactory.Id;
-        public override string Name { get; set; } = "Analogy Words Search";
+        public override string Name { get; set; } = "Words Search";
         public override bool IsUpdateAvailable { get; set; }
         public override string? DownloadURL { get; set; }
         public override string? ChangeLogURL { get; set; }

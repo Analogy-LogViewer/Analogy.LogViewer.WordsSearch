@@ -35,7 +35,7 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public WordSearchDataProvider()
         {
             Id = new Guid("b60aba2a-5130-4e49-ac98-ed1229fd5704");
-            OptionalTitle = $"Analogy Words Search";
+            OptionalTitle = $"Words Search";
             FileNamePath = Settings.FilesLocation;
         }
         public IEnumerable<AnalogyLogMessagePropertyName> HideExistingColumns() => Enumerable.Empty<AnalogyLogMessagePropertyName>();
