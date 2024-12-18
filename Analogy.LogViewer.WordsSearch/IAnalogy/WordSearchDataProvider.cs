@@ -51,7 +51,10 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         {
             //nop
         }
-
+        public void MessageSelected(IAnalogyLogMessage message)
+        {
+            //nop
+        }
         public async Task<IEnumerable<IAnalogyLogMessage>> Process(CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (Settings.AllLoadedWords.Any())
