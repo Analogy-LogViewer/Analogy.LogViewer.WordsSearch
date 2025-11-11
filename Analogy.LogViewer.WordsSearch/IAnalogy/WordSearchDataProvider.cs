@@ -1,5 +1,7 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
+using Analogy.Interfaces.WinForms;
+using Analogy.Interfaces.WinForms.DataTypes;
 using Analogy.LogViewer.WordsSearch.Managers;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
-    public sealed class WordSearchDataProvider : IAnalogySingleFileDataProvider
+    public sealed class WordSearchDataProvider : IAnalogySingleFileDataProviderWinForms
     {
         public event EventHandler<AnalogyStartedProcessingArgs>? ProcessingStarted;
         public event EventHandler<AnalogyEndProcessingArgs>? ProcessingFinished;
@@ -25,7 +27,13 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public Image? SmallImage { get; set; }
         public string OptionalTitle { get; set; }
         public bool UseCustomColors { get; set; }
-        public AnalogyToolTip? ToolTip { get; set; }
+        AnalogyToolTip? IAnalogyDataProvider.ToolTip
+        {
+            get => ToolTip;
+            set => ToolTip = value is AnalogyToolTipWinForms tool ? tool : null;
+        }
+
+        public AnalogyToolTipWinForms? ToolTip { get; set; }
         private readonly char[] ignored = new[] { '[', ']', '{', '}', '(', ')', ',', '"', ':', ';', '`', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '\'', '“' };
         public IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();

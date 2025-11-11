@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
-    public class WordsSearchUserSettingsFactory : TemplateUserSettingsFactory
+    public class WordsSearchUserSettingsFactory : TemplateUserSettingsFactoryWinForms
     {
         public override string Title { get; set; } = "Words Search settings";
         public override UserControl DataProviderSettings { get; set; }

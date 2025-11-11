@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.WordsSearch.Properties;
 using System;
 using System.Collections.Generic;
