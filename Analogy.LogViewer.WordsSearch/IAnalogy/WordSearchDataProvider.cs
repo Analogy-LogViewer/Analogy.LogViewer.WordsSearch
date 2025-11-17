@@ -3,6 +3,7 @@ using Analogy.Interfaces.DataTypes;
 using Analogy.Interfaces.WinForms;
 using Analogy.Interfaces.WinForms.DataTypes;
 using Analogy.LogViewer.WordsSearch.Managers;
+using Analogy.LogViewer.WordsSearch.Properties;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -23,17 +24,11 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
         public string FileNamePath { get; set; }
 
         public Guid Id { get; set; }
-        public Image? LargeImage { get; set; }
-        public Image? SmallImage { get; set; }
+        public Image? LargeImage { get; set; } = Resources.Analogy_image_32x32;
+        public Image? SmallImage { get; set; } = Resources.Analogy_image_16x16;
         public string OptionalTitle { get; set; }
         public bool UseCustomColors { get; set; }
-        AnalogyToolTip? IAnalogyDataProvider.ToolTip
-        {
-            get => ToolTip;
-            set => ToolTip = value is AnalogyToolTipWinForms tool ? tool : null;
-        }
-
-        public AnalogyToolTipWinForms? ToolTip { get; set; }
+        public AnalogyToolTip? ToolTip { get; set; }
         private readonly char[] ignored = new[] { '[', ']', '{', '}', '(', ')', ',', '"', ':', ';', '`', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '\'', '“' };
         public IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
@@ -182,5 +177,13 @@ namespace Analogy.LogViewer.WordsSearch.IAnalogy
             messagesHandler.AppendMessages(messages, FileNamePath);
             return messages;
         }
+
+        public Image? GetDataProviderSmallImage() => SmallImage;
+
+        public Image? GetDataProviderLargeImage() => LargeImage;
+
+        public Image? GetDataProviderToolTipSmallImage() => SmallImage;
+
+        public Image? GetDataProviderToolTipLargeImage() => LargeImage;
     }
 }

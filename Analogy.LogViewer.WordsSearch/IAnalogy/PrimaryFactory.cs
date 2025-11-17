@@ -1,5 +1,6 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
+using Analogy.LogViewer.Template.WinForms;
 using Analogy.LogViewer.WordsSearch.Properties;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Drawing;
 
 namespace Analogy.LogViewer.WordsSearch.IAnalogy
 {
-    public class PrimaryFactory : Analogy.LogViewer.Template.PrimaryFactoryWinForms
+    public class PrimaryFactory : PrimaryFactoryWinForms
     {
         internal static readonly Guid Id = new Guid("34557671-1d6a-4bc3-b2ba-314df574b3aa");
         public override Guid FactoryId { get; set; } = Id;

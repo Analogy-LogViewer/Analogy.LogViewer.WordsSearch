@@ -1,5 +1,6 @@
 ﻿using Analogy.Interfaces;
 using Analogy.LogViewer.Template;
+using Analogy.LogViewer.Template.WinForms;
 using Analogy.LogViewer.WordsSearch.Managers;
 using Microsoft.Extensions.Logging;
 using System;
